@@ -1,7 +1,7 @@
 use crate::vec3::Vec3;
 use crate::ray::Ray; 
 use crate::sphere::Sphere; 
-
+use crate::material::*; 
 
 
 pub trait Hittable {
@@ -11,7 +11,8 @@ pub trait Hittable {
 pub struct HitRecord {
     pub t: f64,
     pub p: Vec3,
-    pub normal: Vec3
+    pub normal: Vec3,
+    pub material: Material,
 }
 
 impl HitRecord {
@@ -19,7 +20,8 @@ impl HitRecord {
         HitRecord{
             t: 0.0, 
             p: Vec3::new(0.0, 0.0, 0.0), 
-            normal: Vec3::new(0.0, 0.0, 0.0)
+            normal: Vec3::new(0.0, 0.0, 0.0),
+            material: Material::Lambertian(Lambertian::new(Vec3::new(0.0, 0.0, 0.0)))
         }
     }
     pub fn normal(&self) -> Vec3 {
@@ -28,6 +30,9 @@ impl HitRecord {
 
     pub fn p(&self) -> Vec3 {
         self.p
+    }
+    pub fn material(&self) -> Material {
+        self.material
     }
 
 }
@@ -64,6 +69,7 @@ impl Hittable for HittableList {
                 rec.p = temp_rec.p;
                 rec.t = temp_rec.t;
                 rec.normal = temp_rec.normal;
+                rec.material = temp_rec.material;
             }
         }
         hit_anything
