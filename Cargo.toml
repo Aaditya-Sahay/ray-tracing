@@ -1,0 +1,13 @@
+[package]
+name = "ray_tracer"
+version = "0.1.0"
+authors = ["Aaditya Sahay <aadityasahay@economist.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+indicatif = "0.7.0"
+rand = "0.3"
+rayon = "0.8.2"
+image = "*"
